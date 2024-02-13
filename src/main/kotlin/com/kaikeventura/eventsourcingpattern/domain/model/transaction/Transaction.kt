@@ -9,23 +9,23 @@ interface Transaction {
 }
 
 data class NewAccountTransaction(
-    val purchaseValue: Long = 0
+    val initialBalance: Long = 0
 ) : Transaction {
-    override val value: Long = purchaseValue
+    override val value: Long = initialBalance
     override val operation: TransactionOperation = INCREASE
 }
 
 data class DepositTransaction(
-    val purchaseValue: Long
+    val depositValue: Long
 ) : Transaction {
-    override val value: Long = purchaseValue
+    override val value: Long = depositValue
     override val operation: TransactionOperation = INCREASE
 }
 
 data class WithdrawTransaction(
-    val reimbursementValue: Long
+    val withdrawValue: Long
 ) : Transaction {
-    override val value: Long = reimbursementValue
+    override val value: Long = withdrawValue
     override val operation: TransactionOperation = DECREASE
 }
 

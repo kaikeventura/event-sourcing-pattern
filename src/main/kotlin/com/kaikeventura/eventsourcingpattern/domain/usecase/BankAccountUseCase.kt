@@ -1,18 +1,33 @@
 package com.kaikeventura.eventsourcingpattern.domain.usecase
 
-import org.slf4j.LoggerFactory
+import com.kaikeventura.eventsourcingpattern.domain.model.account.BankAccount
+import com.kaikeventura.eventsourcingpattern.domain.model.transaction.NewAccountTransaction
+import com.kaikeventura.eventsourcingpattern.domain.service.BankAccountService
+import org.slf4j.LoggerFactory.getLogger
 import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
 
 @Component
-class BankAccountUseCase {
+class BankAccountUseCase(
+    private val bankAccountService: BankAccountService,
+    private val transactionUseCase: TransactionUseCase
+) {
 
-    private val logger = LoggerFactory.getLogger(this::class.java)
+    private val logger = getLogger(this::class.java)
 
-    fun createBankAccount() {
-        TODO()
-    }
+    @Transactional(rollbackFor = [Exception::class])
+    fun createBankAccount(bankAccount: BankAccount, initialBalance: Long = 0) {
+        logger.info("Stating creating a new bank account")
+        bankAccountService.saveBankAccount(
+            bankAccount = bankAccount
+        )
 
-    fun handleTransaction() {
-        TODO()
+        transactionUseCase.handleTransaction(
+            transaction = NewAccountTransaction(
+                initialBalance = initialBalance
+            )
+        )
+
+        logger.info("Finished creating a new bank account")
     }
 }
