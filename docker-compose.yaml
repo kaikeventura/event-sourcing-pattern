@@ -1,9 +1,21 @@
 version: "3"
 
 services:
+  mysql:
+    image: mysql
+    container_name: event-sourcing-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+    ports:
+      - "3306:3306"
+    networks:
+      - bubble
+
   mongodb:
     image: mongo
-    container_name: mongo
+    container_name: event-sourcing-mongodb
     ports:
       - "27017:27017"
     environment:
