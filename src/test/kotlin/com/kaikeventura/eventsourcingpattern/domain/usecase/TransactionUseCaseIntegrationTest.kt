@@ -4,10 +4,10 @@ import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.repository.Transa
 import com.kaikeventura.eventsourcingpattern.adapter.out.mysql.repository.BankAccountRepository
 import com.kaikeventura.eventsourcingpattern.config.TestContainersConfig
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.DepositTransaction
+import com.kaikeventura.eventsourcingpattern.domain.model.transaction.WithdrawTransaction
 import com.kaikeventura.eventsourcingpattern.factory.aBankAccount
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -53,5 +53,36 @@ class TransactionUseCaseIntegrationTest : TestContainersConfig() {
 
         val bankAccountWithUpdatedBalance = bankAccountRepository.findByIdOrNull(bankAccount.id!!)!!
         assertEquals(1000_00L, bankAccountWithUpdatedBalance.balance)
+    }
+
+    @Test
+    fun `should create a deposit transaction and withdraw transaction`() {
+        val bankAccount = bankAccountUseCase.createBankAccount(
+            bankAccount = aBankAccount(
+                document = "321"
+            )
+        )
+
+        assertEquals(0L, bankAccount.balance)
+
+        transactionUseCase.handleTransaction(
+            transaction = DepositTransaction(
+                depositValue = 1000_00L
+            ),
+            bankAccountId = bankAccount.id!!
+        )
+
+        val bankAccountAfterDeposit = bankAccountRepository.findByIdOrNull(bankAccount.id!!)!!
+        assertEquals(1000_00L, bankAccountAfterDeposit.balance)
+
+        transactionUseCase.handleTransaction(
+            transaction = WithdrawTransaction(
+                withdrawValue = 600_00L
+            ),
+            bankAccountId = bankAccount.id!!
+        )
+
+        val bankAccountAfterWithdraw = bankAccountRepository.findByIdOrNull(bankAccount.id!!)!!
+        assertEquals(400_00L, bankAccountAfterWithdraw.balance)
     }
 }
