@@ -85,4 +85,35 @@ class TransactionUseCaseIntegrationTest : TestContainersConfig() {
         val bankAccountAfterWithdraw = bankAccountRepository.findByIdOrNull(bankAccount.id!!)!!
         assertEquals(400_00L, bankAccountAfterWithdraw.balance)
     }
+
+    @Test
+    fun `should create a deposit transaction and withdraw transactionZ`() {
+        val bankAccount = bankAccountUseCase.createBankAccount(
+            bankAccount = aBankAccount(
+                document = "321"
+            )
+        )
+
+        assertEquals(0L, bankAccount.balance)
+
+        transactionUseCase.handleTransaction(
+            transaction = DepositTransaction(
+                depositValue = 1000_00L
+            ),
+            bankAccountId = bankAccount.id!!
+        )
+
+        val bankAccountAfterDeposit = bankAccountRepository.findByIdOrNull(bankAccount.id!!)!!
+        assertEquals(1000_00L, bankAccountAfterDeposit.balance)
+
+        transactionUseCase.handleTransaction(
+            transaction = WithdrawTransaction(
+                withdrawValue = 600_00L
+            ),
+            bankAccountId = bankAccount.id!!
+        )
+
+        val bankAccountAfterWithdraw = bankAccountRepository.findByIdOrNull(bankAccount.id!!)!!
+        assertEquals(400_00L, bankAccountAfterWithdraw.balance)
+    }
 }

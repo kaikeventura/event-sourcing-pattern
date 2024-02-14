@@ -6,8 +6,8 @@ import jakarta.persistence.Column
 import jakarta.persistence.Id
 import java.time.LocalDateTime
 import java.util.UUID
-import org.hibernate.annotations.CreationTimestamp
-import org.hibernate.annotations.UpdateTimestamp
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = "transaction_event")
@@ -19,11 +19,11 @@ data class TransactionEventEntity(
 
     val transaction: Transaction,
 
-    @CreationTimestamp
+    @CreatedDate
     @Column(updatable = false)
     val createdAt: LocalDateTime? = null,
 
-    @UpdateTimestamp
+    @LastModifiedDate
     val modifiedAt: LocalDateTime? = null
 )
 

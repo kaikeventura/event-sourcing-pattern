@@ -9,8 +9,8 @@ interface Transaction {
 }
 
 data class DepositTransaction(
-    override val totalValue: Long = 0,
-    override val operation: TransactionOperation = INCREASE
+    override val totalValue: Long,
+    override val operation: TransactionOperation
 ) : Transaction {
     constructor(depositValue: Long): this(
         totalValue = depositValue,
@@ -19,15 +19,14 @@ data class DepositTransaction(
 }
 
 data class WithdrawTransaction(
-    override val totalValue: Long = 0,
-    override val operation: TransactionOperation = DECREASE
+    override val totalValue: Long,
+    override val operation: TransactionOperation
 ) : Transaction {
     constructor(withdrawValue: Long): this(
         totalValue = withdrawValue,
         operation = DECREASE
     )
 }
-
 
 enum class TransactionOperation {
 
