@@ -98,5 +98,10 @@ class BankAccountUseCaseIntegrationTest : TestContainersConfig() {
         }
     }
 
+    @Test
+    fun `should rebuild the bank account balance on reference date`() {
+
+    }
+
     private fun Int.oddNumber(): Boolean = this % 2 == 1
 }
