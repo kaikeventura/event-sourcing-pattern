@@ -42,6 +42,7 @@ fun BankAccountEntity.toModel(): BankAccount =
 
 fun BankAccount.toEntity(): BankAccountEntity =
     BankAccountEntity(
+        id = id?.let { id },
         balance = balance,
         name = name,
         document = document,

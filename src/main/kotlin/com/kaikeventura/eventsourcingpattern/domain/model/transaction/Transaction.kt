@@ -8,17 +8,17 @@ interface Transaction {
     val operation: TransactionOperation
 }
 
-data class NewAccountTransaction(
-    val initialBalance: Long = 0,
-    override val totalValue: Long = initialBalance,
-    override val operation: TransactionOperation = INCREASE
-) : Transaction
-
 data class DepositTransaction(
     val depositValue: Long,
     override val totalValue: Long = depositValue,
     override val operation: TransactionOperation = INCREASE
-) : Transaction
+) : Transaction {
+    constructor(depositValue: Long): this(
+        depositValue = depositValue,
+        totalValue = depositValue,
+        operation = INCREASE
+    )
+}
 
 data class WithdrawTransaction(
     val withdrawValue: Long,
@@ -27,5 +27,13 @@ data class WithdrawTransaction(
 ) : Transaction
 
 enum class TransactionOperation {
-    INCREASE, DECREASE
+
+    INCREASE {
+        override fun calculate(currentValue: Long, operationValue: Long): Long = currentValue.plus(operationValue)
+    },
+    DECREASE {
+        override fun calculate(currentValue: Long, operationValue: Long): Long = currentValue.minus(operationValue)
+    };
+
+    abstract fun calculate(currentValue: Long, operationValue: Long): Long
 }

@@ -2,6 +2,7 @@ package com.kaikeventura.eventsourcingpattern.domain.service
 
 import com.kaikeventura.eventsourcingpattern.domain.model.account.BankAccount
 import com.kaikeventura.eventsourcingpattern.domain.port.out.database.BankAccountDatabasePort
+import java.util.UUID
 import org.springframework.stereotype.Service
 
 @Service
@@ -13,4 +14,7 @@ class BankAccountService(
         bankAccountDatabasePort.save(
             bankAccount = bankAccount
         )
+
+    fun findBankAccountById(id: UUID) =
+        bankAccountDatabasePort.findById(id)
 }
