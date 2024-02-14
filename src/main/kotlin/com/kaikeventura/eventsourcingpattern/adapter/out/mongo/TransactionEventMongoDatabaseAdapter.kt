@@ -5,6 +5,7 @@ import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.entity.toModel
 import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.repository.TransactionEventRepository
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionEvent
 import com.kaikeventura.eventsourcingpattern.domain.port.out.database.TransactionEventDatabasePort
+import java.time.LocalDateTime
 import java.util.UUID
 import org.springframework.data.domain.Limit
 import org.springframework.stereotype.Component
@@ -22,4 +23,10 @@ class TransactionEventMongoDatabaseAdapter(
             bankAccountId = bankAccountId,
             limit = Limit.of(limit)
         ).map { it.toModel() }.toSet()
+
+    override fun findAllByBankAccountIdLimitDate(bankAccountId: UUID, limitDate: LocalDateTime): Set<TransactionEvent> =
+        repository.findByBankAccountIdAndCreatedAtBefore(
+            bankAccountId = bankAccountId,
+            createdAt = limitDate
+        ).map { it.toModel() }.sortedBy { it.createdAt }.toSet()
 }

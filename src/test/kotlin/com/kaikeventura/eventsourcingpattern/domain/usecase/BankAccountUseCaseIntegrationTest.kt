@@ -4,12 +4,10 @@ import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.repository.Transa
 import com.kaikeventura.eventsourcingpattern.adapter.out.mysql.repository.BankAccountRepository
 import com.kaikeventura.eventsourcingpattern.config.TestContainersConfig
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.DepositTransaction
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionOperation
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionOperation.INCREASE
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.WithdrawTransaction
 import com.kaikeventura.eventsourcingpattern.factory.aBankAccount
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue

@@ -18,6 +18,9 @@ class BankAccountService(
     fun findBankAccountById(id: UUID) =
         bankAccountDatabasePort.findById(id)
 
+    fun existsByAccountById(id: UUID) =
+        bankAccountDatabasePort.existsById(id)
+
     fun findCurrentBalanceByBankAccountId(bankAccountId: UUID) =
         bankAccountDatabasePort.findCurrentBalanceById(bankAccountId)
 }

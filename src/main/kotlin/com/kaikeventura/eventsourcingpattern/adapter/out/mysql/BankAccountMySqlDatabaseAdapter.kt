@@ -20,6 +20,9 @@ class BankAccountMySqlDatabaseAdapter(
     override fun findById(id: UUID): BankAccount? =
         repository.findByIdOrNull(id)?.toModel()
 
+    override fun existsById(id: UUID): Boolean =
+        repository.existsById(id)
+
     override fun findCurrentBalanceById(bankAccountId: UUID): Long? =
         repository.balanceById(bankAccountId)
 }

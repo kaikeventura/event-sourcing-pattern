@@ -1,11 +1,13 @@
 package com.kaikeventura.eventsourcingpattern.domain.usecase
 
+import com.kaikeventura.eventsourcingpattern.domain.exception.BankAccountNotFoundException
 import com.kaikeventura.eventsourcingpattern.domain.model.account.BankAccount
 import com.kaikeventura.eventsourcingpattern.domain.model.account.BankStatement
 import com.kaikeventura.eventsourcingpattern.domain.model.account.toStatement
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionEvent
 import com.kaikeventura.eventsourcingpattern.domain.service.BankAccountService
 import com.kaikeventura.eventsourcingpattern.domain.service.TransactionEventService
+import java.time.LocalDateTime
 import java.util.UUID
 import org.slf4j.LoggerFactory.getLogger
 import org.springframework.stereotype.Component
@@ -38,6 +40,21 @@ class BankAccountUseCase(
         )
     }
 
+    fun rebuildBankAccountBalanceUntil(bankAccountId: UUID, referenceDate: LocalDateTime): Pair<LocalDateTime, Long> {
+        verifyIfBankAccountExists(bankAccountId)
+        val events = transactionEventService.findAllEventsByBankAccountIdLimitDate(
+            bankAccountId = bankAccountId,
+            limitDate = referenceDate
+        )
+
+        val balance = events.fold(0L) { acc, transactionEvent ->
+            val transaction = transactionEvent.transaction
+            transaction.operation.calculate(acc, transaction.totalValue)
+        }
+
+        return Pair(referenceDate, balance)
+    }
+
     internal fun updateBalance(event: TransactionEvent) {
         val bankAccount = getBankAccountById(event.bankAccountId)
         bankAccountService.saveBankAccount(bankAccount.withNewBalance(event))
@@ -45,9 +62,15 @@ class BankAccountUseCase(
 
     fun getCurrentBalanceByBankAccountId(bankAccountId: UUID): Long =
         bankAccountService.findCurrentBalanceByBankAccountId(bankAccountId)
-            ?: throw RuntimeException("Bank account $bankAccountId not found")
+            ?: throw BankAccountNotFoundException(bankAccountId)
 
     private fun getBankAccountById(bankAccountId: UUID): BankAccount =
         bankAccountService.findBankAccountById(bankAccountId)
-            ?: throw RuntimeException("Bank account $bankAccountId not found")
+            ?: throw BankAccountNotFoundException(bankAccountId)
+
+    private fun verifyIfBankAccountExists(bankAccountId: UUID) {
+        if (bankAccountService.existsByAccountById(bankAccountId)) {
+            throw BankAccountNotFoundException(bankAccountId)
+        }
+    }
 }
