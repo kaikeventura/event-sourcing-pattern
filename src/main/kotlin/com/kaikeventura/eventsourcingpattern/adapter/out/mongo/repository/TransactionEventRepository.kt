@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface TransactionEventRepository : MongoRepository<TransactionEventEntity, UUID> {
+interface TransactionEventRepository : MongoRepository<TransactionEventEntity, String> {
     fun findByBankAccountId(bankAccountId: UUID): List<TransactionEventEntity>
 }

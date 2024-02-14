@@ -4,30 +4,27 @@ import com.kaikeventura.eventsourcingpattern.domain.model.transaction.Transactio
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionOperation.INCREASE
 
 interface Transaction {
-    val value: Long
+    val totalValue: Long
     val operation: TransactionOperation
 }
 
 data class NewAccountTransaction(
-    val initialBalance: Long = 0
-) : Transaction {
-    override val value: Long = initialBalance
+    val initialBalance: Long = 0,
+    override val totalValue: Long = initialBalance,
     override val operation: TransactionOperation = INCREASE
-}
+) : Transaction
 
 data class DepositTransaction(
-    val depositValue: Long
-) : Transaction {
-    override val value: Long = depositValue
+    val depositValue: Long,
+    override val totalValue: Long = depositValue,
     override val operation: TransactionOperation = INCREASE
-}
+) : Transaction
 
 data class WithdrawTransaction(
-    val withdrawValue: Long
-) : Transaction {
-    override val value: Long = withdrawValue
+    val withdrawValue: Long,
+    override val totalValue: Long =  withdrawValue,
     override val operation: TransactionOperation = DECREASE
-}
+) : Transaction
 
 enum class TransactionOperation {
     INCREASE, DECREASE

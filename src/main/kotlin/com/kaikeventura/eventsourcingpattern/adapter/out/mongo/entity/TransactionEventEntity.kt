@@ -1,6 +1,5 @@
 package com.kaikeventura.eventsourcingpattern.adapter.out.mongo.entity
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.Transaction
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionEvent
 import jakarta.persistence.Column
@@ -11,14 +10,14 @@ import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document(collation = "transaction_event")
+@Document(collection = "transaction_event")
 data class TransactionEventEntity(
     @Id
     val id: String? = null,
 
     val bankAccountId: UUID,
 
-    val transactionPayload: String,
+    val transaction: Transaction,
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -32,13 +31,12 @@ fun TransactionEventEntity.toModel(): TransactionEvent =
     TransactionEvent(
         id = id!!,
         bankAccountId = bankAccountId,
-//        transaction = Gson().fromJson(transactionPayload, Transaction::class.java)
-        transaction = ObjectMapper().readValue(transactionPayload, Transaction::class.java)
+        transaction = transaction,
+        createdAt = createdAt
     )
 
 fun TransactionEvent.toEntity(): TransactionEventEntity =
     TransactionEventEntity(
         bankAccountId = bankAccountId,
-//        transactionPayload = Gson().toJson(transaction)
-        transactionPayload = ObjectMapper().writeValueAsString(transaction)
+        transaction = transaction
     )
