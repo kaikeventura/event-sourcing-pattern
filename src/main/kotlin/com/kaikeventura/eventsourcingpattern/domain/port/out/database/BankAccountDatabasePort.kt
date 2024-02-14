@@ -6,4 +6,5 @@ import java.util.UUID
 interface BankAccountDatabasePort {
     fun save(bankAccount: BankAccount): BankAccount
     fun findById(id: UUID): BankAccount?
+    fun findCurrentBalanceById(bankAccountId: UUID): Long?
 }

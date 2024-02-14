@@ -3,6 +3,7 @@ package com.kaikeventura.eventsourcingpattern.domain.usecase
 import com.kaikeventura.eventsourcingpattern.domain.model.account.BankAccount
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionEvent
 import com.kaikeventura.eventsourcingpattern.domain.service.BankAccountService
+import java.util.UUID
 import org.slf4j.LoggerFactory.getLogger
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
@@ -28,4 +29,8 @@ class BankAccountUseCase(
 
         bankAccountService.saveBankAccount(bankAccount.withNewBalance(event))
     }
+
+    fun getCurrentBalanceByBankAccountId(bankAccountId: UUID): Long =
+        bankAccountService.findCurrentBalanceByBankAccountId(bankAccountId)
+            ?: throw RuntimeException("Bank account $bankAccountId not found")
 }
