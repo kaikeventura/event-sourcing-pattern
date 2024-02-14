@@ -18,14 +18,15 @@ class BankAccountUseCase(
     @Transactional(rollbackFor = [Exception::class])
     fun createBankAccount(bankAccount: BankAccount, initialBalance: Long = 0) {
         logger.info("Stating creating a new bank account")
-        bankAccountService.saveBankAccount(
+        val savedBankAccount = bankAccountService.saveBankAccount(
             bankAccount = bankAccount
         )
 
         transactionUseCase.handleTransaction(
             transaction = NewAccountTransaction(
                 initialBalance = initialBalance
-            )
+            ),
+            bankAccountId = savedBankAccount.id!!
         )
 
         logger.info("Finished creating a new bank account")

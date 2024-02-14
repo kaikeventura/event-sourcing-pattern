@@ -4,28 +4,41 @@ import com.kaikeventura.eventsourcingpattern.domain.model.transaction.DepositTra
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.NewAccountTransaction
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.Transaction
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.WithdrawTransaction
+import java.util.UUID
 import org.springframework.stereotype.Component
 
 @Component
 class TransactionUseCase {
 
-    fun handleTransaction(transaction: Transaction) {
+    fun handleTransaction(
+        transaction: Transaction,
+        bankAccountId: UUID
+    ) {
         when (transaction) {
-            is NewAccountTransaction -> handleNewAccountTransaction(transaction)
-            is DepositTransaction -> handleDepositTransaction(transaction)
-            is WithdrawTransaction -> handleWithdrawTransaction(transaction)
+            is NewAccountTransaction -> handleNewAccountTransaction(transaction, bankAccountId)
+            is DepositTransaction -> handleDepositTransaction(transaction, bankAccountId)
+            is WithdrawTransaction -> handleWithdrawTransaction(transaction, bankAccountId)
         }
     }
 
-    private fun handleNewAccountTransaction(transaction: NewAccountTransaction) {
+    private fun handleNewAccountTransaction(
+        transaction: NewAccountTransaction,
+        bankAccountId: UUID
+    ) {
 
     }
 
-    private fun handleDepositTransaction(transaction: DepositTransaction) {
+    private fun handleDepositTransaction(
+        transaction: DepositTransaction,
+        bankAccountId: UUID
+    ) {
 
     }
 
-    private fun handleWithdrawTransaction(transaction: WithdrawTransaction) {
+    private fun handleWithdrawTransaction(
+        transaction: WithdrawTransaction,
+        bankAccountId: UUID
+    ) {
 
     }
 
