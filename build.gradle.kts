@@ -5,6 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.4"
 	kotlin("jvm") version "1.9.22"
 	kotlin("plugin.spring") version "1.9.22"
+	kotlin("plugin.jpa") version "1.9.22"
 }
 
 group = "com.kaikeventura"
@@ -28,6 +29,10 @@ dependencies {
 	runtimeOnly("com.mysql:mysql-connector-j")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-testcontainers")
+	testImplementation("org.testcontainers:junit-jupiter")
+	testImplementation("org.testcontainers:mongodb")
+	testImplementation("org.testcontainers:mysql")
 }
 
 tasks.withType<KotlinCompile> {

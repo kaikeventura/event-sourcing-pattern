@@ -1,8 +1,16 @@
 spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/db?createDatabaseIfNotExist=true
+    username: root
+    password: root
+
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: db
+      uri: mongodb://localhost:27017/db
       username: root
       password: root
