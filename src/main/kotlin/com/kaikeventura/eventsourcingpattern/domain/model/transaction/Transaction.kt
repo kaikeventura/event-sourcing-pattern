@@ -6,25 +6,30 @@ import com.kaikeventura.eventsourcingpattern.domain.model.transaction.Transactio
 interface Transaction {
     val totalValue: Long
     val operation: TransactionOperation
+    val description: String
 }
 
 data class DepositTransaction(
     override val totalValue: Long,
-    override val operation: TransactionOperation
+    override val operation: TransactionOperation,
+    override val description: String
 ) : Transaction {
     constructor(depositValue: Long): this(
         totalValue = depositValue,
-        operation = INCREASE
+        operation = INCREASE,
+        description = "Deposit R$ $depositValue"
     )
 }
 
 data class WithdrawTransaction(
     override val totalValue: Long,
-    override val operation: TransactionOperation
+    override val operation: TransactionOperation,
+    override val description: String
 ) : Transaction {
     constructor(withdrawValue: Long): this(
         totalValue = withdrawValue,
-        operation = DECREASE
+        operation = DECREASE,
+        description = "Withdraw R$ $withdrawValue"
     )
 }
 

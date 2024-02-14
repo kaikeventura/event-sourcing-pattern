@@ -2,6 +2,7 @@ package com.kaikeventura.eventsourcingpattern.domain.service
 
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionEvent
 import com.kaikeventura.eventsourcingpattern.domain.port.out.database.TransactionEventDatabasePort
+import java.util.UUID
 import org.springframework.stereotype.Service
 
 @Service
@@ -13,4 +14,7 @@ class TransactionEventService(
         transactionEventDatabasePort.save(
             transactionEvent = transactionEvent
         )
+
+    fun findAllEventsByBankAccountIdLimit(bankAccountId: UUID, limit: Int): Set<TransactionEvent> =
+        transactionEventDatabasePort.findAllByBankAccountIdLimit(bankAccountId, limit)
 }

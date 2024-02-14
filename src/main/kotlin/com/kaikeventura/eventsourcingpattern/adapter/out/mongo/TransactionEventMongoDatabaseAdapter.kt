@@ -5,6 +5,8 @@ import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.entity.toModel
 import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.repository.TransactionEventRepository
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionEvent
 import com.kaikeventura.eventsourcingpattern.domain.port.out.database.TransactionEventDatabasePort
+import java.util.UUID
+import org.springframework.data.domain.Limit
 import org.springframework.stereotype.Component
 
 @Component
@@ -14,4 +16,10 @@ class TransactionEventMongoDatabaseAdapter(
 
     override fun save(transactionEvent: TransactionEvent): TransactionEvent =
         repository.save(transactionEvent.toEntity()).toModel()
+
+    override fun findAllByBankAccountIdLimit(bankAccountId: UUID, limit: Int): Set<TransactionEvent> =
+        repository.findByBankAccountId(
+            bankAccountId = bankAccountId,
+            limit = Limit.of(limit)
+        ).map { it.toModel() }.toSet()
 }
