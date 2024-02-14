@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface BankAccountRepository : JpaRepository<BankAccountEntity, UUID>
+interface BankAccountRepository : JpaRepository<BankAccountEntity, UUID> {
+    fun findByDocument(document: String): BankAccountEntity
+}

@@ -4,11 +4,15 @@ import com.kaikeventura.eventsourcingpattern.domain.model.transaction.DepositTra
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.NewAccountTransaction
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.Transaction
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.WithdrawTransaction
+import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionEvent
+import com.kaikeventura.eventsourcingpattern.domain.service.TransactionEventService
 import java.util.UUID
 import org.springframework.stereotype.Component
 
 @Component
-class TransactionUseCase {
+class TransactionUseCase(
+    private val transactionEventService: TransactionEventService
+) {
 
     fun handleTransaction(
         transaction: Transaction,
@@ -25,7 +29,12 @@ class TransactionUseCase {
         transaction: NewAccountTransaction,
         bankAccountId: UUID
     ) {
-
+        val savedTransactionEvent = transactionEventService.save(
+            transactionEvent = TransactionEvent(
+                bankAccountId = bankAccountId,
+                transaction = transaction
+            )
+        )
     }
 
     private fun handleDepositTransaction(
