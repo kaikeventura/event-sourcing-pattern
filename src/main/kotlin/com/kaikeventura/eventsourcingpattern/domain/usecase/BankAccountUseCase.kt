@@ -69,7 +69,7 @@ class BankAccountUseCase(
             ?: throw BankAccountNotFoundException(bankAccountId)
 
     private fun verifyIfBankAccountExists(bankAccountId: UUID) {
-        if (bankAccountService.existsByAccountById(bankAccountId)) {
+        if (!bankAccountService.existsByAccountById(bankAccountId)) {
             throw BankAccountNotFoundException(bankAccountId)
         }
     }

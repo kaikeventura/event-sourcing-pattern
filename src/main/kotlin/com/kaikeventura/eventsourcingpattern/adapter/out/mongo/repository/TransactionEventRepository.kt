@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface TransactionEventRepository : MongoRepository<TransactionEventEntity, String> {
     fun findByBankAccountId(bankAccountId: UUID, limit: Limit): List<TransactionEventEntity>
-    fun findByBankAccountIdAndCreatedAtBefore(bankAccountId: UUID, createdAt: LocalDateTime): List<TransactionEventEntity>
+    fun findByBankAccountIdAndOccurredAtBefore(bankAccountId: UUID, createdAt: LocalDateTime): List<TransactionEventEntity>
 }

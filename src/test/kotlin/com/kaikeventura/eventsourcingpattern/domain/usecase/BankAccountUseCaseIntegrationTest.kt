@@ -7,6 +7,7 @@ import com.kaikeventura.eventsourcingpattern.domain.model.transaction.DepositTra
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionOperation.INCREASE
 import com.kaikeventura.eventsourcingpattern.domain.model.transaction.WithdrawTransaction
 import com.kaikeventura.eventsourcingpattern.factory.aBankAccount
+import java.time.LocalDateTime
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -100,7 +101,43 @@ class BankAccountUseCaseIntegrationTest : TestContainersConfig() {
 
     @Test
     fun `should rebuild the bank account balance on reference date`() {
+        val bankAccount = bankAccountUseCase.createBankAccount(
+            bankAccount = aBankAccount(
+                document = "321"
+            )
+        )
 
+        val occurredAt = LocalDateTime.parse("2024-02-01T00:10:00")
+        for (index in 1..10) {
+            if (index.oddNumber()) {
+                transactionUseCase.handleTransaction(
+                    transaction = DepositTransaction(
+                        depositValue = 200_00L,
+                        occurredAt = occurredAt.plusDays(index.toLong())
+                    ),
+                    bankAccountId = bankAccount.id!!
+                )
+            } else {
+                transactionUseCase.handleTransaction(
+                    transaction = WithdrawTransaction(
+                        withdrawValue = 200_00L,
+                        occurredAt = occurredAt.plusDays(index.toLong())
+                    ),
+                    bankAccountId = bankAccount.id!!
+                )
+            }
+        }
+
+        val currentBalance = bankAccountUseCase.getCurrentBalanceByBankAccountId(bankAccountId = bankAccount.id!!)
+        assertEquals(0L, currentBalance)
+
+        val referenceDate = LocalDateTime.parse("2024-02-04T00:15:00")
+        val balanceOnReferenceDate = bankAccountUseCase.rebuildBankAccountBalanceUntil(
+            bankAccountId = bankAccount.id!!,
+            referenceDate = referenceDate
+        )
+
+        assertEquals(200_00L, balanceOnReferenceDate.second)
     }
 
     private fun Int.oddNumber(): Boolean = this % 2 == 1

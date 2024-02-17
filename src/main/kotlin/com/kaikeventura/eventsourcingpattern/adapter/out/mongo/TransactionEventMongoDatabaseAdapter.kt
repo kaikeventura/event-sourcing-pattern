@@ -25,7 +25,7 @@ class TransactionEventMongoDatabaseAdapter(
         ).map { it.toModel() }.toSet()
 
     override fun findAllByBankAccountIdLimitDate(bankAccountId: UUID, limitDate: LocalDateTime): Set<TransactionEvent> =
-        repository.findByBankAccountIdAndCreatedAtBefore(
+        repository.findByBankAccountIdAndOccurredAtBefore(
             bankAccountId = bankAccountId,
             createdAt = limitDate
         ).map { it.toModel() }.sortedBy { it.occurredAt }.toSet()
