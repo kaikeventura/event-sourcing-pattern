@@ -24,5 +24,5 @@ fun TransactionEvent.toStatement(): Statement =
         id = id!!,
         value = transaction.totalValue,
         description = transaction.description,
-        occurredAt = createdAt!!
+        occurredAt = occurredAt!!
     )

@@ -28,5 +28,5 @@ class TransactionEventMongoDatabaseAdapter(
         repository.findByBankAccountIdAndCreatedAtBefore(
             bankAccountId = bankAccountId,
             createdAt = limitDate
-        ).map { it.toModel() }.sortedBy { it.createdAt }.toSet()
+        ).map { it.toModel() }.sortedBy { it.occurredAt }.toSet()
 }

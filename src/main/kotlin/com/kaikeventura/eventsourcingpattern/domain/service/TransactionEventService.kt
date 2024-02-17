@@ -20,5 +20,5 @@ class TransactionEventService(
         transactionEventDatabasePort.findAllByBankAccountIdLimit(bankAccountId, limit)
 
     fun findAllEventsByBankAccountIdLimitDate(bankAccountId: UUID, limitDate: LocalDateTime): Set<TransactionEvent> =
-        transactionEventDatabasePort.findAllByBankAccountIdLimit(bankAccountId, limitDate)
+        transactionEventDatabasePort.findAllByBankAccountIdLimitDate(bankAccountId, limitDate)
 }

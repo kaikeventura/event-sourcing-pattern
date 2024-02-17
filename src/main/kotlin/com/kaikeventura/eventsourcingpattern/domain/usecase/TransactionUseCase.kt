@@ -42,7 +42,8 @@ class TransactionUseCase(
         val transactionEvent = transactionEventService.save(
             transactionEvent = TransactionEvent(
                 bankAccountId = bankAccountId,
-                transaction = transaction
+                transaction = transaction,
+                occurredAt = transaction.occurredAt
             )
         )
         bankAccountUseCase.updateBalance(transactionEvent)
@@ -57,7 +58,8 @@ class TransactionUseCase(
         val transactionEvent = transactionEventService.save(
             transactionEvent = TransactionEvent(
                 bankAccountId = bankAccountId,
-                transaction = transaction
+                transaction = transaction,
+                occurredAt = transaction.occurredAt
             )
         )
 

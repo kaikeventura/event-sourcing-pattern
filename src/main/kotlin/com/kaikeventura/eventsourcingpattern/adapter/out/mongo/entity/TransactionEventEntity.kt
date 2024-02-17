@@ -19,6 +19,8 @@ data class TransactionEventEntity(
 
     val transaction: Transaction,
 
+    val occurredAt: LocalDateTime,
+
     @CreatedDate
     @Column(updatable = false)
     val createdAt: LocalDateTime? = null,
@@ -32,11 +34,12 @@ fun TransactionEventEntity.toModel(): TransactionEvent =
         id = id!!,
         bankAccountId = bankAccountId,
         transaction = transaction,
-        createdAt = createdAt
+        occurredAt = occurredAt
     )
 
 fun TransactionEvent.toEntity(): TransactionEventEntity =
     TransactionEventEntity(
         bankAccountId = bankAccountId,
-        transaction = transaction
+        transaction = transaction,
+        occurredAt = occurredAt
     )
