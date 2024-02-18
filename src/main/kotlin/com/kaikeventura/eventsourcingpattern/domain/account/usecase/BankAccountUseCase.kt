@@ -37,7 +37,7 @@ class BankAccountUseCase(
         return BankStatement(
             bankAccountId = bankAccount.id!!,
             currentBalance = bankAccount.balance,
-            statements = transactionEvents.map { it.toStatement() }.sortedBy { it.occurredAt }.toSet()
+            statements = transactionEvents.map { it.toStatement() }.toSet()
         )
     }
 
