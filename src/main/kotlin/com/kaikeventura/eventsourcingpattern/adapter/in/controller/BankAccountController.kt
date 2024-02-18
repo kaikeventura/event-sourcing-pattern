@@ -44,6 +44,7 @@ class BankAccountController(
         ).toDTO()
 
     @GetMapping("/{bankAccountId}/balance-on-date")
+    @ResponseStatus(OK)
     fun getBalanceOnDate(
         @PathVariable("bankAccountId") bankAccountId: UUID,
         @RequestParam("referenceDate") referenceDate: LocalDateTime

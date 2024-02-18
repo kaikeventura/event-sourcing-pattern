@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional
 class TransactionUseCase(
     private val transactionEventService: TransactionEventService,
     private val bankAccountUseCase: BankAccountUseCase
-): TransactionPort {
+) : TransactionPort {
 
     private val logger = LoggerFactory.getLogger(this::class.java)
 
