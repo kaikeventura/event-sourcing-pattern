@@ -4,6 +4,7 @@ import com.kaikeventura.eventsourcingpattern.domain.common.exception.BankAccount
 import com.kaikeventura.eventsourcingpattern.domain.account.model.BankAccount
 import com.kaikeventura.eventsourcingpattern.domain.account.model.BankStatement
 import com.kaikeventura.eventsourcingpattern.domain.account.model.toStatement
+import com.kaikeventura.eventsourcingpattern.domain.account.port.`in`.BankAccountPort
 import com.kaikeventura.eventsourcingpattern.domain.transaction.model.TransactionEvent
 import com.kaikeventura.eventsourcingpattern.domain.account.service.BankAccountService
 import com.kaikeventura.eventsourcingpattern.domain.transaction.service.TransactionEventService
@@ -17,19 +18,19 @@ import org.springframework.transaction.annotation.Transactional
 class BankAccountUseCase(
     private val bankAccountService: BankAccountService,
     private val transactionEventService: TransactionEventService
-) {
+) : BankAccountPort {
 
     private val logger = getLogger(this::class.java)
 
     @Transactional(rollbackFor = [Exception::class])
-    fun createBankAccount(bankAccount: BankAccount) = run {
+    override fun createBankAccount(bankAccount: BankAccount) = run {
         logger.info("Stating creating a new bank account")
         bankAccountService.saveBankAccount(
             bankAccount = bankAccount
         )
     }.also { logger.info("Finished creating a new bank account") }
 
-    fun getBankStatementByBankAccountId(bankAccountId: UUID, limit: Int = 10): BankStatement {
+    override fun getBankStatementByBankAccountId(bankAccountId: UUID, limit: Int): BankStatement {
         val bankAccount = getBankAccountById(bankAccountId)
         val transactionEvents = transactionEventService.findAllEventsByBankAccountIdLimit(bankAccountId, limit)
 
@@ -40,7 +41,7 @@ class BankAccountUseCase(
         )
     }
 
-    fun rebuildBankAccountBalanceUntil(bankAccountId: UUID, referenceDate: LocalDateTime): Pair<LocalDateTime, Long> {
+    override fun rebuildBankAccountBalanceUntil(bankAccountId: UUID, referenceDate: LocalDateTime): Pair<LocalDateTime, Long> {
         verifyIfBankAccountExists(bankAccountId)
         val events = transactionEventService.findAllEventsByBankAccountIdLimitDate(
             bankAccountId = bankAccountId,
