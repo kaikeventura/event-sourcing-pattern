@@ -1,6 +1,6 @@
 package com.kaikeventura.eventsourcingpattern.factory
 
-import com.kaikeventura.eventsourcingpattern.domain.model.account.BankAccount
+import com.kaikeventura.eventsourcingpattern.domain.account.model.BankAccount
 import java.time.LocalDate
 
 fun aBankAccount(

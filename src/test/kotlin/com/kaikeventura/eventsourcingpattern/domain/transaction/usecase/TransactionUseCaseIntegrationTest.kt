@@ -1,11 +1,13 @@
-package com.kaikeventura.eventsourcingpattern.domain.usecase
+package com.kaikeventura.eventsourcingpattern.domain.transaction.usecase
 
 import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.repository.TransactionEventRepository
 import com.kaikeventura.eventsourcingpattern.adapter.out.mysql.repository.BankAccountRepository
 import com.kaikeventura.eventsourcingpattern.config.TestContainersConfig
-import com.kaikeventura.eventsourcingpattern.domain.exception.InsufficientBalanceException
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.DepositTransaction
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.WithdrawTransaction
+import com.kaikeventura.eventsourcingpattern.domain.account.usecase.BankAccountUseCase
+import com.kaikeventura.eventsourcingpattern.domain.common.exception.InsufficientBalanceException
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.DepositTransaction
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.WithdrawTransaction
+import com.kaikeventura.eventsourcingpattern.domain.transaction.usecase.TransactionUseCase
 import com.kaikeventura.eventsourcingpattern.factory.aBankAccount
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals

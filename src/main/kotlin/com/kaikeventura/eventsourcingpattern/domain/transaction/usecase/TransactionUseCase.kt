@@ -1,11 +1,12 @@
-package com.kaikeventura.eventsourcingpattern.domain.usecase
+package com.kaikeventura.eventsourcingpattern.domain.transaction.usecase
 
-import com.kaikeventura.eventsourcingpattern.domain.exception.InsufficientBalanceException
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.DepositTransaction
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.Transaction
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.WithdrawTransaction
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionEvent
-import com.kaikeventura.eventsourcingpattern.domain.service.TransactionEventService
+import com.kaikeventura.eventsourcingpattern.domain.common.exception.InsufficientBalanceException
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.DepositTransaction
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.Transaction
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.WithdrawTransaction
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.TransactionEvent
+import com.kaikeventura.eventsourcingpattern.domain.transaction.service.TransactionEventService
+import com.kaikeventura.eventsourcingpattern.domain.account.usecase.BankAccountUseCase
 import java.util.UUID
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component

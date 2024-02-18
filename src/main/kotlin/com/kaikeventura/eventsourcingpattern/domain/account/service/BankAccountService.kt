@@ -1,7 +1,7 @@
-package com.kaikeventura.eventsourcingpattern.domain.service
+package com.kaikeventura.eventsourcingpattern.domain.account.service
 
-import com.kaikeventura.eventsourcingpattern.domain.model.account.BankAccount
-import com.kaikeventura.eventsourcingpattern.domain.port.out.database.BankAccountDatabasePort
+import com.kaikeventura.eventsourcingpattern.domain.account.model.BankAccount
+import com.kaikeventura.eventsourcingpattern.domain.account.port.out.BankAccountDatabasePort
 import java.util.UUID
 import org.springframework.stereotype.Service
 

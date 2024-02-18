@@ -1,7 +1,7 @@
-package com.kaikeventura.eventsourcingpattern.domain.model.transaction
+package com.kaikeventura.eventsourcingpattern.domain.transaction.model
 
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionOperation.DECREASE
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionOperation.INCREASE
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.TransactionOperation.DECREASE
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.TransactionOperation.INCREASE
 import java.time.LocalDateTime
 import java.time.LocalDateTime.now
 

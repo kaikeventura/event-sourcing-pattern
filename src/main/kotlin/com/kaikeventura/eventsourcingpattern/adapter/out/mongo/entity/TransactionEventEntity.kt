@@ -1,7 +1,7 @@
 package com.kaikeventura.eventsourcingpattern.adapter.out.mongo.entity
 
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.Transaction
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionEvent
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.Transaction
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.TransactionEvent
 import jakarta.persistence.Column
 import jakarta.persistence.Id
 import java.time.LocalDateTime

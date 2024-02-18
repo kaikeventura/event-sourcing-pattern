@@ -1,6 +1,6 @@
-package com.kaikeventura.eventsourcingpattern.domain.port.out.database
+package com.kaikeventura.eventsourcingpattern.domain.transaction.port.out
 
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionEvent
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.TransactionEvent
 import java.time.LocalDateTime
 import java.util.UUID
 

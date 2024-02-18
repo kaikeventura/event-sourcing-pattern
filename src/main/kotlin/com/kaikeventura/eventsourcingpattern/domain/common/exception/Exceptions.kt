@@ -1,4 +1,4 @@
-package com.kaikeventura.eventsourcingpattern.domain.exception
+package com.kaikeventura.eventsourcingpattern.domain.common.exception
 
 import java.util.UUID
 

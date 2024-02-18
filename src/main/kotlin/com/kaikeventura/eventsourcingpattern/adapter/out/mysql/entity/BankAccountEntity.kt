@@ -1,6 +1,6 @@
 package com.kaikeventura.eventsourcingpattern.adapter.out.mysql.entity
 
-import com.kaikeventura.eventsourcingpattern.domain.model.account.BankAccount
+import com.kaikeventura.eventsourcingpattern.domain.account.model.BankAccount
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue

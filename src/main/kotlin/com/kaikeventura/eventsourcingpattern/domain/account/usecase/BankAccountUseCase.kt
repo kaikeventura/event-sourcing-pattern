@@ -1,12 +1,12 @@
-package com.kaikeventura.eventsourcingpattern.domain.usecase
+package com.kaikeventura.eventsourcingpattern.domain.account.usecase
 
-import com.kaikeventura.eventsourcingpattern.domain.exception.BankAccountNotFoundException
-import com.kaikeventura.eventsourcingpattern.domain.model.account.BankAccount
-import com.kaikeventura.eventsourcingpattern.domain.model.account.BankStatement
-import com.kaikeventura.eventsourcingpattern.domain.model.account.toStatement
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionEvent
-import com.kaikeventura.eventsourcingpattern.domain.service.BankAccountService
-import com.kaikeventura.eventsourcingpattern.domain.service.TransactionEventService
+import com.kaikeventura.eventsourcingpattern.domain.common.exception.BankAccountNotFoundException
+import com.kaikeventura.eventsourcingpattern.domain.account.model.BankAccount
+import com.kaikeventura.eventsourcingpattern.domain.account.model.BankStatement
+import com.kaikeventura.eventsourcingpattern.domain.account.model.toStatement
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.TransactionEvent
+import com.kaikeventura.eventsourcingpattern.domain.account.service.BankAccountService
+import com.kaikeventura.eventsourcingpattern.domain.transaction.service.TransactionEventService
 import java.time.LocalDateTime
 import java.util.UUID
 import org.slf4j.LoggerFactory.getLogger

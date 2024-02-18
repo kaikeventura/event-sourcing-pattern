@@ -1,11 +1,12 @@
-package com.kaikeventura.eventsourcingpattern.domain.usecase
+package com.kaikeventura.eventsourcingpattern.domain.account.usecase
 
 import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.repository.TransactionEventRepository
 import com.kaikeventura.eventsourcingpattern.adapter.out.mysql.repository.BankAccountRepository
 import com.kaikeventura.eventsourcingpattern.config.TestContainersConfig
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.DepositTransaction
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionOperation.INCREASE
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.WithdrawTransaction
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.DepositTransaction
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.TransactionOperation.INCREASE
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.WithdrawTransaction
+import com.kaikeventura.eventsourcingpattern.domain.transaction.usecase.TransactionUseCase
 import com.kaikeventura.eventsourcingpattern.factory.aBankAccount
 import java.time.LocalDateTime
 import org.junit.jupiter.api.AfterEach

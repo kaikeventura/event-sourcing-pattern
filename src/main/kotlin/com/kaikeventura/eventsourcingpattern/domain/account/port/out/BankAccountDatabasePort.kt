@@ -1,6 +1,6 @@
-package com.kaikeventura.eventsourcingpattern.domain.port.out.database
+package com.kaikeventura.eventsourcingpattern.domain.account.port.out
 
-import com.kaikeventura.eventsourcingpattern.domain.model.account.BankAccount
+import com.kaikeventura.eventsourcingpattern.domain.account.model.BankAccount
 import java.util.UUID
 
 interface BankAccountDatabasePort {

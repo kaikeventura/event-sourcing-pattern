@@ -3,8 +3,8 @@ package com.kaikeventura.eventsourcingpattern.adapter.out.mongo
 import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.entity.toEntity
 import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.entity.toModel
 import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.repository.TransactionEventRepository
-import com.kaikeventura.eventsourcingpattern.domain.model.transaction.TransactionEvent
-import com.kaikeventura.eventsourcingpattern.domain.port.out.database.TransactionEventDatabasePort
+import com.kaikeventura.eventsourcingpattern.domain.transaction.model.TransactionEvent
+import com.kaikeventura.eventsourcingpattern.domain.transaction.port.out.TransactionEventDatabasePort
 import java.time.LocalDateTime
 import java.util.UUID
 import org.springframework.data.domain.Limit
