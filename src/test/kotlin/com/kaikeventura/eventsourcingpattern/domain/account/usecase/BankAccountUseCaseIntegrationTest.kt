@@ -1,7 +1,7 @@
 package com.kaikeventura.eventsourcingpattern.domain.account.usecase
 
-import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.repository.TransactionEventRepository
-import com.kaikeventura.eventsourcingpattern.adapter.out.mysql.repository.BankAccountRepository
+import com.kaikeventura.eventsourcingpattern.adapter.out.database.mongo.repository.TransactionEventRepository
+import com.kaikeventura.eventsourcingpattern.adapter.out.database.mysql.repository.BankAccountRepository
 import com.kaikeventura.eventsourcingpattern.config.TestContainersConfig
 import com.kaikeventura.eventsourcingpattern.domain.transaction.model.DepositTransaction
 import com.kaikeventura.eventsourcingpattern.domain.transaction.model.TransactionOperation.INCREASE
@@ -61,14 +61,14 @@ class BankAccountUseCaseIntegrationTest : TestContainersConfig() {
 
         for (index in 1..11) {
             if (index.oddNumber()) {
-                transactionUseCase.handleTransaction(
+                transactionUseCase.createTransaction(
                     transaction = DepositTransaction(
                         depositValue = 200_00L
                     ),
                     bankAccountId = bankAccount.id!!
                 )
             } else {
-                transactionUseCase.handleTransaction(
+                transactionUseCase.createTransaction(
                     transaction = WithdrawTransaction(
                         withdrawValue = 200_00L
                     ),
@@ -111,7 +111,7 @@ class BankAccountUseCaseIntegrationTest : TestContainersConfig() {
         val occurredAt = LocalDateTime.parse("2024-02-01T00:10:00")
         for (index in 1..10) {
             if (index.oddNumber()) {
-                transactionUseCase.handleTransaction(
+                transactionUseCase.createTransaction(
                     transaction = DepositTransaction(
                         depositValue = 200_00L,
                         occurredAt = occurredAt.plusDays(index.toLong())
@@ -119,7 +119,7 @@ class BankAccountUseCaseIntegrationTest : TestContainersConfig() {
                     bankAccountId = bankAccount.id!!
                 )
             } else {
-                transactionUseCase.handleTransaction(
+                transactionUseCase.createTransaction(
                     transaction = WithdrawTransaction(
                         withdrawValue = 200_00L,
                         occurredAt = occurredAt.plusDays(index.toLong())

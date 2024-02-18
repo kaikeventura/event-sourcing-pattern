@@ -1,8 +1,8 @@
-package com.kaikeventura.eventsourcingpattern.adapter.out.mongo
+package com.kaikeventura.eventsourcingpattern.adapter.out.database.mongo
 
-import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.entity.toEntity
-import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.entity.toModel
-import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.repository.TransactionEventRepository
+import com.kaikeventura.eventsourcingpattern.adapter.out.database.mongo.entity.toEntity
+import com.kaikeventura.eventsourcingpattern.adapter.out.database.mongo.entity.toModel
+import com.kaikeventura.eventsourcingpattern.adapter.out.database.mongo.repository.TransactionEventRepository
 import com.kaikeventura.eventsourcingpattern.domain.transaction.model.TransactionEvent
 import com.kaikeventura.eventsourcingpattern.domain.transaction.port.out.TransactionEventDatabasePort
 import java.time.LocalDateTime

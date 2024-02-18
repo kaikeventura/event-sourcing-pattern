@@ -1,4 +1,4 @@
-package com.kaikeventura.eventsourcingpattern.adapter.out.mysql.entity
+package com.kaikeventura.eventsourcingpattern.adapter.out.database.mysql.entity
 
 import com.kaikeventura.eventsourcingpattern.domain.account.model.BankAccount
 import jakarta.persistence.Column

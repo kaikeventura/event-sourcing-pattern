@@ -1,6 +1,6 @@
-package com.kaikeventura.eventsourcingpattern.adapter.out.mysql.repository
+package com.kaikeventura.eventsourcingpattern.adapter.out.database.mysql.repository
 
-import com.kaikeventura.eventsourcingpattern.adapter.out.mysql.entity.BankAccountEntity
+import com.kaikeventura.eventsourcingpattern.adapter.out.database.mysql.entity.BankAccountEntity
 import java.util.UUID
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query

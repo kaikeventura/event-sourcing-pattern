@@ -1,8 +1,8 @@
-package com.kaikeventura.eventsourcingpattern.adapter.out.mysql
+package com.kaikeventura.eventsourcingpattern.adapter.out.database.mysql
 
-import com.kaikeventura.eventsourcingpattern.adapter.out.mysql.entity.toEntity
-import com.kaikeventura.eventsourcingpattern.adapter.out.mysql.entity.toModel
-import com.kaikeventura.eventsourcingpattern.adapter.out.mysql.repository.BankAccountRepository
+import com.kaikeventura.eventsourcingpattern.adapter.out.database.mysql.entity.toEntity
+import com.kaikeventura.eventsourcingpattern.adapter.out.database.mysql.entity.toModel
+import com.kaikeventura.eventsourcingpattern.adapter.out.database.mysql.repository.BankAccountRepository
 import com.kaikeventura.eventsourcingpattern.domain.account.model.BankAccount
 import com.kaikeventura.eventsourcingpattern.domain.account.port.out.BankAccountDatabasePort
 import java.util.UUID

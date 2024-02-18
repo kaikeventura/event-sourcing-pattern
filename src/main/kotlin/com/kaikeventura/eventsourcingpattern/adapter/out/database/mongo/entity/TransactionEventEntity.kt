@@ -1,4 +1,4 @@
-package com.kaikeventura.eventsourcingpattern.adapter.out.mongo.entity
+package com.kaikeventura.eventsourcingpattern.adapter.out.database.mongo.entity
 
 import com.kaikeventura.eventsourcingpattern.domain.transaction.model.Transaction
 import com.kaikeventura.eventsourcingpattern.domain.transaction.model.TransactionEvent

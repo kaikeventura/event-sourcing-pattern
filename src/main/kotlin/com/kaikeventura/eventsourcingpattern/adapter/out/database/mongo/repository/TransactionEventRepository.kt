@@ -1,6 +1,6 @@
-package com.kaikeventura.eventsourcingpattern.adapter.out.mongo.repository
+package com.kaikeventura.eventsourcingpattern.adapter.out.database.mongo.repository
 
-import com.kaikeventura.eventsourcingpattern.adapter.out.mongo.entity.TransactionEventEntity
+import com.kaikeventura.eventsourcingpattern.adapter.out.database.mongo.entity.TransactionEventEntity
 import java.time.LocalDateTime
 import java.util.UUID
 import org.springframework.data.domain.Limit
